@@ -29,6 +29,8 @@ node_modules/
 # dotenv environment variables file
 .env
 
+# PhpStorm project files
 .idea
 
+# Build directory
 build
