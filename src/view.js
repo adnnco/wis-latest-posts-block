@@ -1,25 +1,34 @@
-/**
- * Use this file for JavaScript code that you want to run in the front-end
- * on posts/pages that contain this block.
- *
- * When this file is defined as the value of the `viewScript` property
- * in `block.json` it will be enqueued on the front end of the site.
- *
- * Example:
- *
- * ```js
- * {
- *   "viewScript": "file:./view.js"
- * }
- * ```
- *
- * If you're not making any changes to this file because your project doesn't need any
- * JavaScript running in the front-end, then you should delete this file and remove
- * the `viewScript` property from `block.json`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-metadata/#view-script
- */
+import React, {useEffect, useState} from 'react';
+import ReactDOM from 'react-dom';
 
-/* eslint-disable no-console */
-console.log( 'Hello World! (from create-block-wis-latest-posts-block block)' );
-/* eslint-enable no-console */
+const LatestPostsBlock = ({numberOfPosts}) => {
+	const [posts, setPosts] = useState([]);
+	const defaultImage = 'path/to/default/image.jpg'; // Replace with the path to your default image
+
+	useEffect(() => {
+		fetch(`/wp-json/wis/v1/latest-posts?per_page=${numberOfPosts}`)
+			.then((response) => response.json())
+			.then((data) => setPosts(data));
+	}, [numberOfPosts]);
+
+	return (
+		<div className="latest-posts-block">
+			{posts.map((post) => (
+				<div key={post.id} className="post-item">
+					<img className="post-image" src={post.featured_image || defaultImage} alt={post.title}/>
+					<div className="post-content">
+						<h2 className="post-title">{post.title}</h2>
+						<div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.excerpt}}/>
+					</div>
+				</div>
+			))}
+		</div>
+	);
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+	const block = document.querySelector('.wp-block-create-block-wis-latest-posts-block');
+	const numberOfPosts = block.getAttribute('data-number-of-posts') || 5;
+
+	ReactDOM.render(<LatestPostsBlock numberOfPosts={numberOfPosts}/>, block);
+});

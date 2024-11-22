@@ -17,30 +17,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/reference/functions/register_block_type/
- */
 function create_block_wis_latest_posts_block_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 
 add_action( 'init', 'create_block_wis_latest_posts_block_block_init' );
 
-
-function wis_register_rest_routes(): void {
+function wis_register_rest_routes() {
 	register_rest_route( 'wis/v1', '/latest-posts', array(
 		'methods'  => 'GET',
 		'callback' => 'wis_get_latest_posts',
 	) );
 }
 
-function wis_get_latest_posts( $data ): WP_REST_Response {
+add_action( 'rest_api_init', 'wis_register_rest_routes' );
+
+function wis_get_latest_posts( $data ) {
 	$args = array(
-		'numberposts' => 5, // You can change this to the number of posts you want to retrieve
+		'numberposts' => 5,
 		'post_status' => 'publish',
 	);
 
@@ -49,15 +43,14 @@ function wis_get_latest_posts( $data ): WP_REST_Response {
 
 	foreach ( $posts as $post ) {
 		$featured_image_url = get_the_post_thumbnail_url( $post->ID, 'full' );
-		$data[]             = array(
+
+		$data[] = array(
 			'id'             => $post->ID,
 			'title'          => get_the_title( $post->ID ),
 			'excerpt'        => get_the_excerpt( $post->ID ),
-			'featured_image' => $featured_image_url,
+			'featured_image' => ( $featured_image_url ) ?: esc_url( 'https://picsum.photos/300/300' ),
 		);
 	}
 
 	return new WP_REST_Response( $data, 200 );
 }
-
-add_action( 'rest_api_init', 'wis_register_rest_routes' );

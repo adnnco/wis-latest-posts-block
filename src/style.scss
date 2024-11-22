@@ -1,12 +1,56 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
 .wp-block-create-block-wis-latest-posts-block {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+	background-color: #f9f9f9;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+	.latest-posts-block {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 20px;
+	}
+
+	.post-item {
+		align-items: center;
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 8px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: transform 0.2s;
+		overflow: hidden;
+		position: relative;
+
+		&:hover {
+			transform: translateY(-5px);
+		}
+
+		.post-image {
+			width: 100%;
+			border-radius: 8px;
+			margin-right: 20px;
+		}
+
+		.post-content {
+			display: flex;
+			flex-direction: column;
+
+			.post-title {
+				font-size: 1.25rem; /* Adjusted font size */
+				margin-bottom: 10px;
+			}
+
+			.post-excerpt {
+				font-size: .75rem; /* Adjusted font size */
+				line-height: 1.25rem;
+				color: #666;
+			}
+		}
+	}
+
+	@media (max-width: 768px) {
+		.latest-posts-block {
+			grid-template-columns: 1fr;
+		}
+
+	}
 }

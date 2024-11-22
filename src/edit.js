@@ -29,11 +29,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<div {...useBlockProps()}>
 				{posts.map((post) => (
 					<div key={post.id}>
-						<h2>{post.title}</h2>
-						<div dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-						{post.featured_image && (
-							<img src={post.featured_image} alt={post.title} />
-						)}
+						<h6>{post.title}</h6>
 					</div>
 				))}
 			</div>
