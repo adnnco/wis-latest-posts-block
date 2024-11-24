@@ -1,55 +1,53 @@
 === Wis Latest Posts Block ===
-Contributors:      The WordPress Contributors
+Contributors:      Adnan Gunay
 Tags:              block
 Tested up to:      6.6
 Stable tag:        0.1.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Example block scaffolded with Create Block tool.
+Wis Latest Posts Block is a WordPress plugin designed for the Gutenberg editor. This plugin enables users to easily display their latest posts in a customizable and user-friendly block.
 
-== Description ==
+=== Features ===
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+• A custom “Latest Posts” block for the Gutenberg editor.
+• Easy to use and fully customizable.
+• Developed with modern technologies like React and SCSS.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+=== Requirements ===
 
-== Installation ==
+• WordPress Version: 6.6 or higher
+• PHP Version: 7.2 or higher
+• Node.js: 14 or higher (for development)
 
-This section describes how to install the plugin and get it working.
+=== Installation ===
 
-e.g.
+1. Download the plugin from the GitHub repository.
+2. Extract the files and upload them to the wp-content/plugins directory.
+3. Activate the plugin from the WordPress admin panel.
+4. Start using the “Wis Latest Posts Block” in the Gutenberg editor.
 
-1. Upload the plugin files to the `/wp-content/plugins/wis-latest-posts-block` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
+=== Development ===
 
+Running the Project
 
-== Frequently Asked Questions ==
+1. Install the required dependencies:
 
-= A question that someone might have =
+npm install
 
-An answer to that question.
+2. Build the project:
 
-= What about foo bar? =
+npm run build
 
-Answer to foo bar dilemma.
+3. Start the development server:
+	
+npm start
 
-== Screenshots ==
+=== Source Code Structure ===
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+• The src/ directory contains the block logic and styles.
+• The wis-latest-posts-block.php file handles WordPress integration.
 
-== Changelog ==
+=== License ===
 
-= 0.1.0 =
-* Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+This project is licensed under the GPL-2.0-or-later license.
